@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Widget> pages = [
+    Container(
+      color: Colors.red,
+      child: Center(
+        child: Text('Page 1'),
+      ),
+    ),
+    Container(
+      color: Colors.green,
+      child: Center(
+        child: Text('Page 2'),
+      ),
+    ),
+    Container(
+      color: Colors.blue,
+      child: Center(
+        child: Text('Page 3'),
+      ),
+    ),
+  ];
+
+  int currentPageIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +48,28 @@ class HomePage extends StatelessWidget {
               Text(
                 "taupex",
                 style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white),
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
               ),
               SizedBox(
                 height: 0.05.sh,
               ),
-              Image.asset("assets/images/taupex.png"),
+              Container(
+                height: 0.5.sh,
+                child: PageView.builder(
+                  itemCount: pages.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      currentPageIndex = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    return pages[index];
+                  },
+                ),
+              ),
               SizedBox(
                 height: 0.05.sh,
               ),
@@ -85,8 +125,6 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-
                     children: [
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -123,8 +161,6 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-
                     children: [
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -161,8 +197,6 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-
                     children: [
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10),
